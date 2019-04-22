@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.oscre.org/ns/LC-version-1.1/OS/ConveyancerInstructionUpdateSend" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ec="http://www.oscre.org/ns/v1/ExtensionCommon" xmlns:hd="http://www.oscre.org/ns/v1/Header" targetNamespace="http://www.oscre.org/ns/LC-version-1.1/OS/ConveyancerInstructionUpdateSend" elementFormDefault="qualified">
+	<xsd:import namespace="http://www.oscre.org/ns/v1/Header" schemaLocation="Header.xsd"/>
+	<xsd:import namespace="http://www.oscre.org/ns/v1/ExtensionCommon" schemaLocation="ExtensionCommon.xsd"/>
+	<!--Document-->
+	<xsd:element name="ConveyancerInstructionUpdateSend" type="ConveyancerInstructionUpdateSendType"/>
+	<!--ABIEs-->
+	<xsd:complexType name="ConveyancerInstructionUpdateSendType">
+		<xsd:sequence>
+			<xsd:element ref="hd:Header"/>
+			<xsd:element name="MessageSentDate" type="MessageSentDateType" minOccurs="0"/>
+			<xsd:element name="TransactionInformation" type="Q1TransactionInformationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="UpdateList" type="Q1UpdateListType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BuyerPartyType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="BuyerPerson" type="Q1BuyerPersonType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Organization" type="Q1OrganizationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1OrganizationType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="LegalEntityID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="LegalClassificationCode" type="OrganizationTypeCodeType"/>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="ShortName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Description" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="IncorporationDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="DoingBusinessAsName" type="Q1NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PlaceOfRegistration" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="PlaceOfIncorporation" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="IsMainBorrower" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="RegisteredOfficeAddress" type="Q1RegisteredOfficeAddressType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OrganizationTypeCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="OrganizationTypeCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="OrganizationTypeCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Limited Partnership"/>
+			<xsd:enumeration value="Partnership"/>
+			<xsd:enumeration value="Private Company Limited By Guarantee"/>
+			<xsd:enumeration value="Private Company Limited By Shares"/>
+			<xsd:enumeration value="Public Limited Company"/>
+			<xsd:enumeration value="Sole Trader"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Q1RegisteredOfficeAddressType">
+		<xsd:sequence>
+			<xsd:element name="Postbox" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingNumber" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Department" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Floor" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Room" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="StreetName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CityName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CitySub-Division" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentity" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentityCode" type="UKCountyCodeType" minOccurs="0"/>
+			<xsd:element name="Zone" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="AddressLine" type="Q1AddressLineType" minOccurs="0"/>
+			<xsd:element name="Country" type="Q1CountryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BuyerPersonType">
+		<xsd:sequence>
+			<xsd:element name="FullName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="GivenName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="MiddleName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="FamilyName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Title" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="MaritalStatus" type="ec:MaritalStatusType" minOccurs="0"/>
+			<xsd:element name="DateOfBirth" type="DateType" minOccurs="0"/>
+			<xsd:element name="IsMainBuyer" type="IndicatorType"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BorrowerPartyType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="BorrowerPerson" type="Q1BorrowerPersonType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BorrowerPersonType">
+		<xsd:sequence>
+			<xsd:element name="FullName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="GivenName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="MiddleName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="FamilyName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Title" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="MaritalStatus" type="ec:MaritalStatusType" minOccurs="0"/>
+			<xsd:element name="DateOfBirth" type="DateType" minOccurs="0"/>
+			<xsd:element name="IsMainBorrower" type="IndicatorType"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--extension done by TM-->
+	<xsd:complexType name="Q1LegalOwnerPartyType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="LegalOwnerPerson" type="Q1LegalOwnerPersonType" minOccurs="0" maxOccurs="4"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1LegalOwnerPersonType">
+		<xsd:sequence>
+			<xsd:element name="FullName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="GivenName" type="Q1NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MiddleName" type="Q1NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="FamilyName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Title" type="Q1TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--end of extension done by TM-->
+	<xsd:complexType name="Q1SubjectPropertyType">
+		<xsd:sequence>
+			<xsd:element name="PropertyReference" type="ec:ReferenceType" maxOccurs="unbounded"/>
+			<xsd:element name="LegalOwnerParty" type="Q1LegalOwnerPartyType" minOccurs="0"/>
+			<xsd:element name="PropertyAddress" type="Q1PropertyAddressType"/>
+			<xsd:element name="CurrentPropertyStatus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OldPropertyStatus" type="xsd:string" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1PropertyAddressType">
+		<xsd:sequence>
+			<xsd:element name="Plot" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingNumber" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Department" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Floor" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Room" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="StreetName" type="Q1TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CityName" type="Q1TextType"/>
+			<xsd:element name="CitySub-Division" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentity" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentityCode" type="UKCountyCodeType" minOccurs="0"/>
+			<xsd:element name="Zone" type="Q1TextType"/>
+			<xsd:element name="UPRN" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="AddressLine" type="Q1AddressLineType" minOccurs="0"/>
+			<xsd:element name="Country" type="Q1CountryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1NoteType">
+		<xsd:sequence>
+			<xsd:element name="Type" type="Q1NoteTypeEnum"/>
+			<xsd:element name="Code" type="xsd:string"/>
+			<xsd:element name="Value" type="xsd:string"/>
+			<xsd:element name="Note" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="Q1NoteTypeEnum">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="AcceptanceNote"/>
+			<xsd:enumeration value="ConveyancerPartyNotes"/>
+			<xsd:enumeration value="RejectionNote"/>
+			<xsd:enumeration value="PanelInstructionNote"/>
+			<xsd:enumeration value="PanelInstructionListNote"/>
+			<xsd:enumeration value="AdditionalComment"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="MessageSentDateType">
+		<xsd:sequence>
+			<xsd:element name="Date" type="DateType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1UpdateListType">
+		<xsd:sequence>
+			<xsd:element name="UpdateListItem" type="Q1UpdateListItemType" maxOccurs="999"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1UpdateListItemType">
+		<xsd:sequence>
+			<xsd:element name="UpdateType" type="Q1UpdateType"/>
+			<xsd:choice>
+				<xsd:element name="Address" type="AddressUpdateDetailsType" minOccurs="0"/>
+				<xsd:element name="Tenure" type="TenureType" minOccurs="0"/>
+				<xsd:element name="MileStone" type="MileStoneType" minOccurs="0"/>
+				<xsd:element name="Delay" type="DelayType" minOccurs="0"/>
+				<xsd:element name="CaseNote" type="CaseNoteType" minOccurs="0"/>
+				<xsd:element name="Advance" type="AdvanceType" minOccurs="0"/>
+				<xsd:element name="FastTrack" type="FastTrackType" minOccurs="0"/>
+				<xsd:element name="FeeEarner" type="FeeEarnerType" minOccurs="0"/>
+				<xsd:element name="PlannedCompletionDate" type="PlannedCompletionDateType" minOccurs="0"/>
+				<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+				<xsd:element name="Fee" type="FeeUpdateType" minOccurs="0"/>
+				<xsd:element name="Reference" type="ReferenceUpdateType" minOccurs="0"/>
+				<xsd:element name="ClientDetails" type="ClientDetailsType" minOccurs="0"/>
+				<xsd:element name="RelatedCase" type="RelatedCaseType" minOccurs="0"/>
+				<xsd:element name="PropertyAddress" type="PropertyAddressType" minOccurs="0"/>
+				<xsd:element name="PropertyDetails" type="PropertyDetailsType" minOccurs="0"/>
+				<xsd:element name="InstructionDetails" type="InstructionDetailsType" minOccurs="0"/>
+				<xsd:element name="BranchInformation" type="BranchInformationType" minOccurs="0"/>
+				<xsd:element name="DocumentUpdate" type="DocumentUpdateType" minOccurs="0"/>
+				<xsd:element name="GetDocumentList" type="GetDocumentListType" minOccurs="0"/>
+				<xsd:element name="TransactionDetails" type="TransactionDetailsUpdateType" minOccurs="0"/>
+				<xsd:element name="LinkTo" type="LinkToUpdateType" minOccurs="0"/>
+				<xsd:element name="InviteAll" type="InviteAllType" minOccurs="0"/>
+				<xsd:element name="InviteSelected" type="InviteSelectedType" minOccurs="0"/>
+				<xsd:element name="GetRecipientList" type="GetRecipientListType" minOccurs="0"/>
+				<xsd:element name="GetClientList" type="GetClientListType" minOccurs="0"/>
+				<xsd:element name="SendMessage" type="SendMessageType" minOccurs="0"/>
+				<xsd:element name="MessageNotification" type="MessageListType" minOccurs="0"/>
+				<xsd:element name="GetMessageList" type="GetMessageListType" minOccurs="0"/>
+				<xsd:element name="GetDocumentPack" type="GetDocumentPackType" minOccurs="0"/>
+				<xsd:element name="GetAccountDetails" type="GetAccountDetailsType" minOccurs="0"/>
+				<xsd:element name="ClientDetailsChange" type="ClientDetailsChangeType" minOccurs="0"/>
+				<xsd:element name="ReActivateOnlineForm" type="ReActivateOnlineFormType" minOccurs="0"/>
+				<xsd:element name="ClientRegistration" type="ClientRegistrationUpdateType" minOccurs="0"/>
+				<xsd:element name="StaffDetails" type="StaffDetailsType" minOccurs="0"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetDocumentPackType">
+		<xsd:sequence>
+			<xsd:element name="IsComplete" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="MissingDocuments" type="MissingDocumentsType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MissingDocumentsType">
+		<xsd:sequence>
+			<xsd:element name="Document" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="DocumentTypeShortName" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="AllowUpload" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetAccountDetailsType">
+		<xsd:sequence>
+			<xsd:element name="Panels" type="GetAccountDetailsPanelsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetAccountDetailsPanelsType">
+		<xsd:sequence>
+			<xsd:element name="Panel" type="AccountDetailPanelType" minOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AccountDetailPanelType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="BusinessOriginatorParty" type="BusinessOriginatorPartiesType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="IntroducerParties" type="IntroducerPartyListType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ConveyancerParties" type="ConveyancerPartiesListType"/>
+			<xsd:element name="AllowedDocumentTypes" type="AllowedDocumentsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IntroducerPartyListType">
+		<xsd:sequence>
+			<xsd:element name="IntroducerParty" type="IntroducerPartyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IntroducerPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="xsd:string"/>
+			<xsd:element name="Name" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BusinessOriginatorPartiesType">
+		<xsd:sequence>
+			<xsd:element name="BusinessOriginatorParty" type="BusinessOriginatorPartyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BusinessOriginatorPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ReferencePrefix" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConveyancerPartiesListType">
+		<xsd:sequence>
+			<xsd:element name="ConveyancerParty" type="ConveyancerPartyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConveyancerPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ConveyancerTypeDescription" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="PropertyLawyers" type="PropertyLawyersType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PropertyLawyersType">
+		<xsd:sequence>
+			<xsd:element name="PropertyLawyer" type="PropertyLawyerType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PropertyLawyerType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="xsd:string"/>
+			<xsd:element name="Name" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AllowedDocumentsType">
+		<xsd:sequence>
+			<xsd:element name="AllowedDocumentType" type="AllowedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AllowedDocumentType">
+		<xsd:sequence>
+			<xsd:element name="DocumentType" type="xsd:string"/>
+			<xsd:element name="Description" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetMessageListType">
+		<xsd:sequence>
+			<xsd:element name="IncludeReadMessages" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ReceivedMessageList" type="MessageListType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="SentMessageList" type="MessageListType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageListType">
+		<xsd:sequence>
+			<xsd:element name="Message" type="MessageNotificationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SentMessageListType">
+		<xsd:sequence>
+			<xsd:element name="Message" type="SendMessageType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SendMessageType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType" minOccurs="0"/>
+			<xsd:element name="RecipientsList" type="RecipientsListType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="Subject" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="Body" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DeliveryType" type="ec:MessageDeliveryType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DateTimeSent" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="ConversationId" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageNotificationType">
+		<xsd:sequence>
+			<xsd:element name="MessageId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ConversationId" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="Sender" type="MessagingPartyType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="RecipientList" type="RecipientsListType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="Subject" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="Body" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DeliveryType" type="ec:MessageDeliveryType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DateTimeSent" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvitationResponseType">
+		<xsd:sequence>
+			<xsd:element name="Invitation" type="InvitationType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvitationType">
+		<xsd:sequence>
+			<xsd:element name="FailureReason" type="InvitationFailureReasonError" minOccurs="0"/>
+			<xsd:element name="Client" type="ClientInformationType" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvitationFailureReasonError">
+		<xsd:sequence>
+			<xsd:element name="Error" type="InvitationFailureReason" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetRecipientListType">
+		<xsd:sequence>
+			<xsd:element name="RecipientsList" type="RecipientsListType" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetClientListType">
+		<xsd:sequence>
+			<xsd:element name="ClientList" type="ClientListType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClientListType">
+		<xsd:sequence>
+			<xsd:element name="Client" type="ClientInformationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RecipientsListType">
+		<xsd:sequence>
+			<xsd:element name="Recipient" type="MessagingPartyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessagingPartyType">
+		<xsd:sequence>
+			<xsd:element name="DisplayName" type="Q1NameType" minOccurs="1"/>
+			<xsd:element name="PartyTypeDescription" type="xsd:string" minOccurs="1"/>
+			<xsd:element name="Identifier" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="MessageParty" type="ec:MessageParty" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DeliveryTypeList" type="DeliveryTypeListType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="Status" type="ec:ActionStatusType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="FailureReason" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeliveryTypeListType">
+		<xsd:sequence>
+			<xsd:element name="DeliveryType" type="ec:MessageDeliveryType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClientInformationType">
+		<xsd:sequence>
+			<xsd:element name="GivenName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="MiddleName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="FamilyName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Title" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Identifier" type="Q1IdentifierType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="InvitationStatus" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="EmailAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="LastInvitedDate" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="UserName" type="Q1TextType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InviteAllType">
+		<xsd:sequence>
+			<xsd:element name="InvitationResponse" type="InvitationResponseType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InviteSelectedType">
+		<xsd:sequence>
+			<xsd:element name="ClientList" type="ClientListType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="InvitationResponse" type="InvitationResponseType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetDocumentListType">
+		<xsd:sequence>
+			<xsd:element name="DocumentID" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="DocumentList" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Document" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ID" type="xsd:integer"/>
+									<xsd:element name="Description" type="xsd:string"/>
+									<xsd:element name="Type" type="xsd:string" minOccurs="0"/>
+									<xsd:element name="CanReActivate" type="xsd:boolean" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Document" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ID" type="xsd:integer"/>
+						<xsd:element name="Description" type="xsd:string"/>
+						<xsd:element name="Type" type="xsd:string"/>
+						<xsd:element name="Data" type="AttachmentType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ReActivateOnlineFormType">
+		<xsd:sequence>
+    		<xsd:element name="ID" type="xsd:integer"/>
+	    	<xsd:element name="Description" type="xsd:string"/>										
+			<xsd:element name="Type" type="xsd:string" />							
+		</xsd:sequence>
+	</xsd:complexType>	
+	<xsd:complexType name="FeeUpdateType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="FeeItem" type="ec:FeeItemType"/>
+			<xsd:element name="UpdateDateTime" type="DateType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="StatusType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="NewStatus" type="StatusCodeType"/>
+			<xsd:element name="UpdateDateTime" type="DateType"/>
+			<xsd:element name="ReasonCode" type="ReasonCodeType" minOccurs="0"/>
+			<xsd:element name="UpdateNote" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AddressUpdateDetailsType">
+		<xsd:sequence>
+			<xsd:element name="AddressContext" type="ec:AddressContextType"/>
+			<xsd:choice>
+				<xsd:element name="BorrowerParty" type="Q1BorrowerPartyType" minOccurs="0"/>
+				<xsd:element name="LegalOwnerParty" type="Q1LegalOwnerPartyType" minOccurs="0"/>
+				<xsd:element name="BuyerParty" type="Q1BuyerPartyType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="UpdateNote" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="ReasonCodeType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="AmendedOfferRequired" />
+			<xsd:enumeration value="AwaitingClientToConfirmOurInstruction" />
+			<xsd:enumeration value="AwaitingInformationFromBorrower" />
+			<xsd:enumeration value="AwaitingInformationFromEstateAgent" />
+			<xsd:enumeration value="AwaitingInformationFromLandlord" />
+			<xsd:enumeration value="AwaitingInformationFromLender" />
+			<xsd:enumeration value="AwaitingInformationFromOtherLawyer" />
+			<xsd:enumeration value="AwaitingPaymentOnAccount" />
+			<xsd:enumeration value="AwaitingResponseFromBuyersLawyer" />
+			<xsd:enumeration value="AwaitingResponseFromMortgageAdviser" />
+			<xsd:enumeration value="AwaitingResponseFromSearchProvider" />
+			<xsd:enumeration value="AwaitingResponseFromSellersLawyer" />
+			<xsd:enumeration value="AwaitingResponseFromSurveyor" />
+			<xsd:enumeration value="Borrower" />
+			<xsd:enumeration value="BorrowerCancelledNowProceeding" />
+			<xsd:enumeration value="BorrowerDisputedShortfall" />
+			<xsd:enumeration value="BorrowerNotResponding" />
+			<xsd:enumeration value="BorrowerPreference" />
+			<xsd:enumeration value="BorrowerRequestedDelay" />
+			<xsd:enumeration value="CannotActForTheLender" />
+			<xsd:enumeration value="CapacityLimitExceeded" />
+			<xsd:enumeration value="CaseAborted" />
+			<xsd:enumeration value="ChainDelayed" />
+			<xsd:enumeration value="ChainOfTransactionsHasBroken" />
+			<xsd:enumeration value="ChangedToAnotherAgentAndNoLongerWantsConveyancing" />
+			<xsd:enumeration value="ClientUnhappyWithFees" />
+			<xsd:enumeration value="ClientUnhappyWithFeesDisinstructed" />
+			<xsd:enumeration value="Closed" />
+			<xsd:enumeration value="ClosedbyBorrower" />
+			<xsd:enumeration value="ClosedbyLender" />
+			<xsd:enumeration value="Completion" />
+			<xsd:enumeration value="CompletionNotificationBySolicitor" />
+			<xsd:enumeration value="ConflictofInterest" />
+			<xsd:enumeration value="ConflictOfInterestSubsequentlyIdentified" />
+			<xsd:enumeration value="Customerdecidednottoproceed" />
+			<xsd:enumeration value="CustomerhasgotaloanfromanotherLender" />
+			<xsd:enumeration value="Customerisre-applyingforfinance" />
+			<xsd:enumeration value="Customerrequesteddelay" />
+			<xsd:enumeration value="Customerusinganothersolicitor" />
+			<xsd:enumeration value="Donotdothistypeoftransaction" />
+			<xsd:enumeration value="DuplicateCase" />
+			<xsd:enumeration value="DuplicateInstruction" />
+			<xsd:enumeration value="ExchangeofContracts" />
+			<xsd:enumeration value="ExistingLender" />
+			<xsd:enumeration value="HSBC case" />
+			<xsd:enumeration value="HubIncorrectClientNameAddress" />
+			<xsd:enumeration value="HubIncorrectExistingAccountNumber" />
+			<xsd:enumeration value="HubIncorrectExistingLender" />
+			<xsd:enumeration value="HUBPreferredCompletionDate" />
+			<xsd:enumeration value="InstructedDifferentLawyerAsCheaper" />
+			<xsd:enumeration value="InstructedDifferentLawyerAsLocal" />
+			<xsd:enumeration value="InstructionConfirmed" />
+			<xsd:enumeration value="InsuranceDifficulties" />
+			<xsd:enumeration value="InvoiceReceivedSolicitor" />
+			<xsd:enumeration value="LackofresponsefromCustomer" />
+			<xsd:enumeration value="LocalAuthoritySearchDelayed" />
+			<xsd:enumeration value="Matrimonial" />
+			<xsd:enumeration value="MemoOfSaleReceived" />
+			<xsd:enumeration value="MoniesReceivedSolicitor" />
+			<xsd:enumeration value="NewLender" />
+			<xsd:enumeration value="NoPreviousLenderDetails" />
+			<xsd:enumeration value="NoResourceAvailable" />
+			<xsd:enumeration value="NotFastTrack" />
+			<xsd:enumeration value="OfferDeclinedORRefused" />
+			<xsd:enumeration value="OfferDeclinedRefused" />
+			<xsd:enumeration value="Offerexpired" />
+			<xsd:enumeration value="OnlyEverWantedQuote" />
+			<xsd:enumeration value="OpenedInError" />
+			<xsd:enumeration value="OTHER" />
+			<xsd:enumeration value="Other" />
+			<xsd:enumeration value="PreviousSolicitorPriorRegistration" />
+			<xsd:enumeration value="Propertywithdrawnfrommarket(SaleorPurchase)" />
+			<xsd:enumeration value="PurchaseFallenThroughButWillBuyAnother" />
+			<xsd:enumeration value="PurchaseFallenThroughNotBuyingAnother" />
+			<xsd:enumeration value="PurchasersSolicitor" />
+			<xsd:enumeration value="ReferralAbortedByPanelManager" />
+			<xsd:enumeration value="relatedcasehasfallenthrough" />
+			<xsd:enumeration value="SasineCaseDeedsRequired" />
+			<xsd:enumeration value="SecondChargeDelay" />
+			<xsd:enumeration value="SellersSolicitor" />
+			<xsd:enumeration value="Solicitor" />
+			<xsd:enumeration value="TakingPropertyOffMarketAltogether" />
+			<xsd:enumeration value="TitleDeedsSecured" />
+			<xsd:enumeration value="TitleDefect" />
+			<xsd:enumeration value="TransferOfEquity" />
+			<xsd:enumeration value="Unabletosellexistingproperty(SaleorPurchase)" />
+			<xsd:enumeration value="UncheckExchange" />
+			<xsd:enumeration value="UnregisteredProperty" />
+			<xsd:enumeration value=""/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="StatusCodeType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="InAbeyance"/>
+			<xsd:enumeration value="OnHold"/>
+			<xsd:enumeration value="Aborted"/>
+			<xsd:enumeration value="Active"/>
+			<xsd:enumeration value="Completed"/>
+			<xsd:enumeration value="In Abeyance"/>
+			<xsd:enumeration value="Exchanged"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="MileStoneType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="FeeEarner" type="FeeEarnerDetailType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="Milestone" type="xsd:string"/>
+			<xsd:element name="MilestoneCompletionDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="Unset" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="ExpectedCompletionDate" type="DateType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DelayType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="Milestone" type="xsd:string"/>
+			<xsd:element name="DelayInDays" type="xsd:integer"/>
+			<xsd:element name="DelayNote" type="xsd:string"/>
+			<xsd:element name="DelayCode" type="DelayCodeType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="StaffDetailsType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="StaffCase" type="xsd:boolean"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CaseNoteType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="FeeEarner" type="FeeEarnerDetailType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="Note" type="xsd:string"/>
+			<xsd:element name="CaseNoteCreationDate" type="DateType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AdvanceType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="AdvanceAmount" type="xsd:decimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TenureType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="TenureOption" type="TenureOptionType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FastTrackType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="FastTrackOption" type="xsd:boolean"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FeeEarnerType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="FeeEarnerDetail" type="FeeEarnerDetailType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PlannedCompletionDateType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+			<xsd:element name="Date" type="DateType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FeeEarnerDetailType">
+		<xsd:sequence>
+			<xsd:element name="FirstName" type="xsd:string"/>
+			<xsd:element name="LastName" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="TenureOptionType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="F"/>
+			<xsd:enumeration value="L"/>
+			<xsd:enumeration value="FE"/>
+			<xsd:enumeration value=""/>
+			<xsd:enumeration value="U"/>
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="20"/>
+			<xsd:enumeration value="30"/>
+			<xsd:enumeration value="40"/>
+			<xsd:enumeration value="100"/>
+			<xsd:enumeration value="110"/>
+			<xsd:enumeration value="120"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DelayCodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AmendedOfferRequired"/>
+			<xsd:enumeration value="AwaitingClientToConfirmOurInstruction"/>
+			<xsd:enumeration value="AwaitingInformationFromBorrower"/>
+			<xsd:enumeration value="AwaitingInformationFromEstateAgent"/>
+			<xsd:enumeration value="AwaitingInformationFromLandlord"/>
+			<xsd:enumeration value="AwaitingInformationFromLender"/>
+			<xsd:enumeration value="AwaitingInformationFromOtherLawyer"/>
+			<xsd:enumeration value="AwaitingPaymentOnAccount"/>
+			<xsd:enumeration value="AwaitingResponseFromBuyersLawyer"/>
+			<xsd:enumeration value="AwaitingResponseFromMortgageAdviser"/>
+			<xsd:enumeration value="AwaitingResponseFromSearchProvider"/>
+			<xsd:enumeration value="AwaitingResponseFromSellersLawyer"/>
+			<xsd:enumeration value="AwaitingResponseFromSurveyor"/>
+			<xsd:enumeration value="Borrower"/>
+			<xsd:enumeration value="BorrowerCancelledNowProceeding"/>
+			<xsd:enumeration value="BorrowerDisputedShortfall"/>
+			<xsd:enumeration value="BorrowerNotResponding"/>
+			<xsd:enumeration value="BorrowerPreference"/>
+			<xsd:enumeration value="BorrowerRequestedDelay"/>
+			<xsd:enumeration value="ChainDelayed"/>
+			<xsd:enumeration value="CompletionNotificationBySolicitor"/>
+			<xsd:enumeration value="ExistingLender"/>
+			<xsd:enumeration value="HubIncorrectClientNameAddress"/>
+			<xsd:enumeration value="HubIncorrectExistingAccountNumber"/>
+			<xsd:enumeration value="HubIncorrectExistingLender"/>
+			<xsd:enumeration value="HUBPreferredCompletionDate"/>
+			<xsd:enumeration value="InsuranceDifficulties"/>
+			<xsd:enumeration value="InvoiceReceivedSolicitor"/>
+			<xsd:enumeration value="LocalAuthoritySearchDelayed"/>
+			<xsd:enumeration value="Matrimonial"/>
+			<xsd:enumeration value="MoniesReceivedSolicitor"/>
+			<xsd:enumeration value="NewLender"/>
+			<xsd:enumeration value="NoPreviousLenderDetails"/>
+			<xsd:enumeration value="NotFastTrack"/>
+			<xsd:enumeration value="PreviousSolicitorPriorRegistration"/>
+			<xsd:enumeration value="PurchasersSolicitor"/>
+			<xsd:enumeration value="SasineCaseDeedsRequired"/>
+			<xsd:enumeration value="SecondChargeDelay"/>
+			<xsd:enumeration value="SellersSolicitor"/>
+			<xsd:enumeration value="Solicitor"/>
+			<xsd:enumeration value="TitleDefect"/>
+			<xsd:enumeration value="TransferOfEquity"/>
+			<xsd:enumeration value="UnregisteredProperty"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ReferenceUpdateType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="NewCustomerReference" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClientDetailsType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Clients">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Client" minOccurs="0" maxOccurs="unbounded">						
+							<xsd:complexType>						
+								<xsd:all>
+									<xsd:element name="Title" type="xsd:string"/>
+									<xsd:element name="ForeName" type="xsd:string"/>
+									<xsd:element name="MiddleName" type="xsd:string"/>
+									<xsd:element name="SurName" type="xsd:string"/>									
+									<xsd:element name="Address" minOccurs="0">
+										<xsd:complexType>
+											<xsd:all>
+												<xsd:element name="AddressLine1" type="xsd:string"/>
+												<xsd:element name="AddressLine2" type="xsd:string"/>
+												<xsd:element name="AddressLine3" type="xsd:string"/>
+												<xsd:element name="AddressLine4" type="xsd:string"/>
+												<xsd:element name="City" type="xsd:string"/>
+												<xsd:element name="County" type="xsd:string"/>
+												<xsd:element name="Postcode" type="xsd:string"/>
+												<xsd:element name="Country" type="xsd:string"/>
+											</xsd:all>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="Communication" minOccurs="0" maxOccurs="1">
+										<xsd:complexType>
+											<xsd:all>
+												<xsd:element name="EmailAddressList" minOccurs="0" maxOccurs="1">
+													<xsd:complexType>
+														<xsd:all>
+															<xsd:element name="EmailAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+														</xsd:all>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="ContactNumberList" minOccurs="0" maxOccurs="1">
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="ContactNumber" type="PhoneNumberType" minOccurs="0" maxOccurs="4"/>
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+											</xsd:all>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="AdditionalInformationList" type="ec:AdditionalInformationListType" minOccurs="0"/>
+								</xsd:all>								
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClientRegistrationUpdateType">
+		<xsd:sequence>
+			<xsd:element name="Client" type="ClientInformationType" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClientDetailsChangeType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Clients">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Client" minOccurs="0" maxOccurs="unbounded">						
+							<xsd:complexType>						
+								<xsd:all>
+									<xsd:element name="Title" type="xsd:string"/>
+									<xsd:element name="ForeName" type="xsd:string"/>
+									<xsd:element name="MiddleName" type="xsd:string"/>
+									<xsd:element name="SurName" type="xsd:string"/>
+									<xsd:element name="Identifier" type="Q1IdentifierType" minOccurs="0"/>
+									<xsd:element name="DateOfBirth" type="DateType" minOccurs="0"/>
+									<xsd:element name="DeleteClient" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="Address" minOccurs="0">
+										<xsd:complexType>
+											<xsd:all>
+												<xsd:element name="AddressLine1" type="xsd:string"/>
+												<xsd:element name="AddressLine2" type="xsd:string"/>
+												<xsd:element name="AddressLine3" type="xsd:string"/>
+												<xsd:element name="AddressLine4" type="xsd:string"/>
+												<xsd:element name="City" type="xsd:string"/>
+												<xsd:element name="County" type="xsd:string"/>
+												<xsd:element name="Postcode" type="xsd:string"/>
+												<xsd:element name="Country" type="xsd:string"/>
+											</xsd:all>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="Communication" minOccurs="0" maxOccurs="1">
+										<xsd:complexType>
+											<xsd:all>
+												<xsd:element name="EmailAddressList" minOccurs="0" maxOccurs="1">
+													<xsd:complexType>
+														<xsd:all>
+															<xsd:element name="EmailAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+														</xsd:all>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="ContactNumberList" minOccurs="0" maxOccurs="1">
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="ContactNumber" type="PhoneNumberType" minOccurs="0" maxOccurs="4"/>
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+											</xsd:all>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="AdditionalInformationList" type="ec:AdditionalInformationListType" minOccurs="0"/>
+								</xsd:all>								
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PhoneNumberType">
+		<xsd:simpleContent>
+			<xsd:extension base="PhoneNumber">
+				<xsd:attribute name="type">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="HomePhone"/>
+							<xsd:enumeration value="MobilePhone"/>
+							<xsd:enumeration value="WorkPhone"/>
+							<xsd:enumeration value="Fax"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="PhoneNumber">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:complexType name="RelatedCaseType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="RelatedCase" type="IndicatorType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PropertyAddressType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="Organisation" type="xsd:string"/>
+			<xsd:element name="Flat" type="xsd:string"/>
+			<xsd:element name="Premise" type="xsd:string"/>
+			<xsd:element name="Street" type="xsd:string"/>
+			<xsd:element name="Locality" type="xsd:string"/>
+			<xsd:element name="PostTown" type="xsd:string"/>
+			<xsd:element name="County" type="xsd:string"/>
+			<xsd:element name="Postcode" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PropertyDetailsType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="PropertyValue" type="xsd:decimal"/>
+			<xsd:element name="MortgageValue" type="xsd:decimal"/>
+			<xsd:element name="RedemptionValue" type="xsd:decimal"/>
+			<xsd:element name="TitleNumber" type="xsd:string"/>
+			<xsd:element name="PropertyStatus" type="CurrentPropertyStatusType"/>
+			<xsd:element name="PropertyType" type="PropertyType"/>
+			<xsd:element name="PropertyStyle" type="PropertyStyle"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="CurrentPropertyStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="For Sale"/>
+			<xsd:enumeration value="SSTC - Not Viewing"/>
+			<xsd:enumeration value="SSTC - Still Viewing"/>
+			<xsd:enumeration value="Withdrawn"/>
+			<xsd:enumeration value="Draft"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="InstructionDetailsType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="ProductDescription" type="xsd:string"/>
+			<xsd:element name="ServiceDescription" type="xsd:string"/>
+			<xsd:element name="LifePolicyAssignable" type="IndicatorType"/>
+			<xsd:element name="LifePolicyAmount" type="xsd:decimal"/>
+			<xsd:element name="MPOSID" type="xsd:integer"/>
+			<xsd:element name="Registered" type="IndicatorType"/>
+			<xsd:element name="FreeEPC" type="IndicatorType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BranchInformationType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType"/>
+			<xsd:element name="SourceName" type="xsd:string"/>
+			<xsd:element name="BranchName" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentUpdateType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DocumentType" type="xsd:string"/>
+			<xsd:element name="DocumentDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Filename" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="FileTypeDescription" type="xsd:string"/>
+			<xsd:element name="Attachment" type="AttachmentType"/>
+			<xsd:element name="Overwrite" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="Version" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SharedPartyList" type="SharedPartyListType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SharedPartyListType">
+		<xsd:sequence>
+			<xsd:element name="SharedParty" type="SharedPartyType" minOccurs="1" maxOccurs="unbounded" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SharedPartyType">
+		<xsd:sequence>
+			<xsd:element name="SharedPartyName" type="SharedPartyNameType" />	
+			<xsd:element name="Permission" type="PermissionType" />			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="LinkToUpdateType">
+		<xsd:sequence>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType" maxOccurs="unbounded"/>
+			<xsd:element name="UpdateDateTime" type="DateType"/>
+			<xsd:element name="UnLink" type="xsd:boolean" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransactionDetailsUpdateType">
+		<xsd:sequence>
+			<xsd:element name="TransactionAmount" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetDocumentList">
+		<xsd:sequence>
+			<xsd:element name="DocumentID" type="xsd:integer" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DateType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:date"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="DateTimeType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:dateTime"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="IndicatorType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:boolean"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="Q1UpdateType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="MileStone"/>
+			<xsd:enumeration value="CaseNote"/>
+			<xsd:enumeration value="FeeEarner"/>
+			<xsd:enumeration value="Tenure"/>
+			<xsd:enumeration value="Delay"/>
+			<xsd:enumeration value="PlannedCompletionDate"/>
+			<xsd:enumeration value="FastTrack"/>
+			<xsd:enumeration value="Advance"/>
+			<xsd:enumeration value="Status"/>
+			<xsd:enumeration value="Address"/>
+			<xsd:enumeration value="Fee"/>
+			<xsd:enumeration value="Reference"/>
+			<xsd:enumeration value="ClientDetails"/>
+			<xsd:enumeration value="RelatedCase"/>
+			<xsd:enumeration value="PropertyAddress"/>
+			<xsd:enumeration value="PropertyDetails"/>
+			<xsd:enumeration value="InstructionDetails"/>
+			<xsd:enumeration value="BranchInformation"/>
+			<xsd:enumeration value="Document"/>
+			<xsd:enumeration value="GetInstructionDetails"/>
+			<xsd:enumeration value="GetDocumentList"/>
+			<xsd:enumeration value="LinkTo"/>
+			<xsd:enumeration value="GetRecipientList"/>
+			<xsd:enumeration value="GetClientList"/>
+			<xsd:enumeration value="SendMessage"/>
+			<xsd:enumeration value="MessageNotification"/>
+			<xsd:enumeration value="GetMessageList"/>
+			<xsd:enumeration value="GetAccountDetails"/>
+			<xsd:enumeration value="InviteSelected"/>
+			<xsd:enumeration value="InviteAll"/>
+			<xsd:enumeration value="GetDocumentPack"/>
+			<xsd:enumeration value="ClientDetailsChange"/>
+			<xsd:enumeration value="ReActivateOnlineForm"/>
+			<xsd:enumeration value="ClientRegistration"/>
+			<xsd:enumeration value="StaffDetails"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Q1TransactionInformationType">
+		<xsd:sequence>
+			<xsd:element name="InstructionDate" type="DateType"/>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType" maxOccurs="unbounded"/>
+			<xsd:element name="Reference" type="Q1ReferenceType" minOccurs="0" maxOccurs="3"/>
+			<xsd:element name="ConveyancerParty" type="Q1ConveyancerPartyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BusinessInstructorParty" type="Q1BusinessInstructorPartyType" minOccurs="0"/>
+			<xsd:element name="BusinessOriginatorParty" type="Q1BusinessOriginatorPartyType" minOccurs="0"/>
+			<xsd:element name="IntroducerParty" type="Q1PartyType" minOccurs="0"/>
+			<xsd:element name="PanelManagerParty" type="Q1PartyType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1ConveyancerPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Type" type="ec:ConveyancerType" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1PartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+			<xsd:element name="Organization" type="Q1OrganizationType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1ReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Reference" type="Q1TextType"/>
+			<xsd:element name="AllocatedBy" type="Q1TextType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BusinessInstructorPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="RegulatoryID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BusinessOriginatorPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="RegulatoryID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1IdentifierType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1NameType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1ContactType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="JobTitle" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="DepartmentName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="PrimaryContactIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="Salutation" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Communication" type="Q1CommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1MailingAddressType">
+		<xsd:sequence>
+			<xsd:element name="Type" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingNumber" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Department" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Floor" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Room" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="StreetName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CityName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CitySub-Division" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentity" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentityCode" type="UKCountyCodeType" minOccurs="0"/>
+			<xsd:element name="Zone" type="Q1TextType"/>
+			<xsd:element name="AddressLine" type="Q1AddressLineType" minOccurs="0"/>
+			<xsd:element name="Country" type="Q1CountryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1TextType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1CommunicationType">
+		<xsd:sequence>
+			<xsd:element name="ChannelCode" type="ChannelCodeType"/>
+			<xsd:element name="Value" type="Q1TextType"/>
+			<xsd:element name="Description" type="Q1TextType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UKCountyCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="UKCountyCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1AddressLineType">
+		<xsd:sequence>
+			<xsd:element name="Line" type="Q1TextType" maxOccurs="7"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1CountryType">
+		<xsd:sequence>
+			<xsd:element name="IdentificationCode" type="UKCountryCodeType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ChannelCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="ChannelCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="UKCountyCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Bedfordshire"/>
+			<xsd:enumeration value="Berkshire"/>
+			<xsd:enumeration value="Buckinghamshire"/>
+			<xsd:enumeration value="Cambridgeshire"/>
+			<xsd:enumeration value="Cheshire"/>
+			<xsd:enumeration value="Cornwall"/>
+			<xsd:enumeration value="Cumbria"/>
+			<xsd:enumeration value="Derbyshire"/>
+			<xsd:enumeration value="Devon"/>
+			<xsd:enumeration value="Dorset"/>
+			<xsd:enumeration value="Durham"/>
+			<xsd:enumeration value="East Sussex"/>
+			<xsd:enumeration value="Essex"/>
+			<xsd:enumeration value="Gloucestershire"/>
+			<xsd:enumeration value="Greater London"/>
+			<xsd:enumeration value="Greater Manchester"/>
+			<xsd:enumeration value="Hampshire"/>
+			<xsd:enumeration value="Herefordshire"/>
+			<xsd:enumeration value="Hertfordshire"/>
+			<xsd:enumeration value="Isle of Wight"/>
+			<xsd:enumeration value="Kent"/>
+			<xsd:enumeration value="Lancashire"/>
+			<xsd:enumeration value="Leicestershire"/>
+			<xsd:enumeration value="Lincolnshire"/>
+			<xsd:enumeration value="Merseyside"/>
+			<xsd:enumeration value="Norfolk"/>
+			<xsd:enumeration value="North Yorkshire"/>
+			<xsd:enumeration value="Northamptonshire"/>
+			<xsd:enumeration value="Northumberland"/>
+			<xsd:enumeration value="Nottinghamshire"/>
+			<xsd:enumeration value="Oxfordshire"/>
+			<xsd:enumeration value="Shropshire"/>
+			<xsd:enumeration value="Somerset"/>
+			<xsd:enumeration value="South Yorkshire"/>
+			<xsd:enumeration value="Staffordshire"/>
+			<xsd:enumeration value="Suffolk"/>
+			<xsd:enumeration value="Surrey"/>
+			<xsd:enumeration value="Tyne and Wear"/>
+			<xsd:enumeration value="Warwickshire"/>
+			<xsd:enumeration value="West Midlands"/>
+			<xsd:enumeration value="West Sussex"/>
+			<xsd:enumeration value="West Yorkshire"/>
+			<xsd:enumeration value="Wiltshire"/>
+			<xsd:enumeration value="Worcestershire"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="UKCountryCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="UKCountryCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="ChannelCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="AA"/>
+			<xsd:enumeration value="AB"/>
+			<xsd:enumeration value="AC"/>
+			<xsd:enumeration value="AD"/>
+			<xsd:enumeration value="AE"/>
+			<xsd:enumeration value="AF"/>
+			<xsd:enumeration value="AG"/>
+			<xsd:enumeration value="AH"/>
+			<xsd:enumeration value="AI"/>
+			<xsd:enumeration value="AJ"/>
+			<xsd:enumeration value="AK"/>
+			<xsd:enumeration value="AL"/>
+			<xsd:enumeration value="AM"/>
+			<xsd:enumeration value="AN"/>
+			<xsd:enumeration value="AO"/>
+			<xsd:enumeration value="AP"/>
+			<xsd:enumeration value="CA"/>
+			<xsd:enumeration value="DX"/>
+			<xsd:enumeration value="EI"/>
+			<xsd:enumeration value="EM"/>
+			<xsd:enumeration value="EX"/>
+			<xsd:enumeration value="FT"/>
+			<xsd:enumeration value="FX"/>
+			<xsd:enumeration value="GM"/>
+			<xsd:enumeration value="IE"/>
+			<xsd:enumeration value="IM"/>
+			<xsd:enumeration value="MA"/>
+			<xsd:enumeration value="PB"/>
+			<xsd:enumeration value="PS"/>
+			<xsd:enumeration value="SW"/>
+			<xsd:enumeration value="TE"/>
+			<xsd:enumeration value="TG"/>
+			<xsd:enumeration value="TL"/>
+			<xsd:enumeration value="TM"/>
+			<xsd:enumeration value="TT"/>
+			<xsd:enumeration value="TX"/>
+			<xsd:enumeration value="XF"/>
+			<xsd:enumeration value="XG"/>
+			<xsd:enumeration value="XH"/>
+			<xsd:enumeration value="XI"/>
+			<xsd:enumeration value="XJ"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="UKCountryCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="England"/>
+			<xsd:enumeration value="Northern Ireland"/>
+			<xsd:enumeration value="Scotland"/>
+			<xsd:enumeration value="Wales"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="TenureTypeCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="TenureTypeCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="TenureTypeCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="20"/>
+			<xsd:enumeration value="30"/>
+			<xsd:enumeration value="40"/>
+			<xsd:enumeration value="100"/>
+			<xsd:enumeration value="110"/>
+			<xsd:enumeration value="120"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PropertyType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="House"/>
+			<xsd:enumeration value="TownHouse"/>
+			<xsd:enumeration value="Apartment"/>
+			<xsd:enumeration value="Bungalow"/>
+			<xsd:enumeration value="SemiCommercial"/>
+			<xsd:enumeration value="StudioFlat"/>
+			<xsd:enumeration value="ParkHome"/>
+			<xsd:enumeration value="Land"/>
+			<xsd:enumeration value="Garage"/>
+			<xsd:enumeration value="CharacterProperty"/>
+			<xsd:enumeration value="GuestHouseOrHotel"/>
+			<xsd:enumeration value="RetirementProperty"/>
+			<xsd:enumeration value="Flat"/>
+			<xsd:enumeration value="Bedsit"/>
+			<xsd:enumeration value="Caravan"/>
+			<xsd:enumeration value="BarnConversion"/>
+			<xsd:enumeration value="Cottage"/>
+			<xsd:enumeration value="Maisonette"/>
+			<xsd:enumeration value="MobileHome"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PropertyStyle">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Detached"/>
+			<xsd:enumeration value="SemiDetached"/>
+			<xsd:enumeration value="MidTerraced"/>
+			<xsd:enumeration value="EndTerraced"/>
+			<xsd:enumeration value="Equestrian"/>
+			<xsd:enumeration value="Terraced"/>
+			<xsd:enumeration value="Linked"/>
+			<xsd:enumeration value="LinkDetached"/>
+			<xsd:enumeration value="TownHouseOrMews"/>
+			<xsd:enumeration value="Chalet"/>
+			<xsd:enumeration value="BarnConversion"/>
+			<xsd:enumeration value="Maisonette"/>
+			<xsd:enumeration value="Basement"/>
+			<xsd:enumeration value="GroundFloor"/>
+			<xsd:enumeration value="FirstFloor"/>
+			<xsd:enumeration value="UpperFloor"/>
+			<xsd:enumeration value="Penthouse"/>
+			<xsd:enumeration value="Converted"/>
+			<xsd:enumeration value="PurposeBuilt"/>
+			<xsd:enumeration value="ClusterHouse"/>
+			<xsd:enumeration value="RoomsOnly"/>
+			<xsd:enumeration value="OtherFloor"/>
+			<xsd:enumeration value="Miscellaneous"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="AttachmentType">
+		<xsd:sequence>
+			<xsd:element name="Date" type="DateType" minOccurs="0"/>
+			<xsd:element name="EmbeddedFileBinaryObject" type="BinaryObjectType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BinaryObjectType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:base64Binary">
+				<xsd:attribute name="filename" type="xsd:string" use="optional"/>
+				<xsd:attribute name="format" type="xsd:string" use="optional"/>
+				<xsd:attribute name="characterSetCode" type="xsd:normalizedString" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>	
+	<xsd:simpleType name="InvitationFailureReason">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Incomplete DocumentPack"/>
+			<xsd:enumeration value="Invalid Email"/>
+			<xsd:enumeration value="Invalid ClientID"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SharedPartyNameType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Introducer"/>
+			<xsd:enumeration value="Conveyancer"/>
+			<xsd:enumeration value="PanelManager"/>			
+			<xsd:enumeration value="EA"/>
+			<xsd:enumeration value="FS"/>
+			<xsd:enumeration value="Client"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PermissionType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="List"/>
+			<xsd:enumeration value="Read"/>			
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

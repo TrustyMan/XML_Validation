@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.oscre.org/ns/LC-version-1.1/OS/ConveyancerInstructionReject" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.oscre.org/ns/LC-version-1.1/OS/ConveyancerInstructionReject" xmlns:ec="http://www.oscre.org/ns/v1/ExtensionCommon" xmlns:hd="http://www.oscre.org/ns/v1/Header" elementFormDefault="qualified">
+	<xsd:import namespace="http://www.oscre.org/ns/v1/Header" schemaLocation="Header.xsd"/>
+	<xsd:import namespace="http://www.oscre.org/ns/v1/ExtensionCommon" schemaLocation="ExtensionCommon.xsd"/>
+	<!--Document-->
+	<xsd:element name="ConveyancerInstructionReject" type="ConveyancerInstructionRejectType"/>
+	<!--ABIEs-->
+	<xsd:complexType name="ConveyancerInstructionRejectType">
+		<xsd:sequence>
+			<xsd:element ref="hd:Header"/>
+			<xsd:element name="MessageSentDate" type="MessageSentDateType"/>
+			<xsd:element name="TransactionInformation" type="Q1TransactionInformationType"/>
+			<xsd:element name="ConveyancerInstruction" type="Q1ConveyancerInstructionType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="RejectionResponse" type="Q1RejectionResponseType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageSentDateType">
+		<xsd:sequence>
+			<xsd:element name="Date" type="DateType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1AddressLineType">
+		<xsd:sequence>
+			<xsd:element name="Line" type="Q1TextType" maxOccurs="7"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BorrowerPartyType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="Q1NameType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BusinessInstructorPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="RegulatoryID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1BusinessOriginatorPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="RegulatoryID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1CommunicationType">
+		<xsd:sequence>
+			<xsd:element name="ChannelCode" type="ChannelCodeType"/>
+			<xsd:element name="Value" type="Q1TextType"/>
+			<xsd:element name="Description" type="Q1TextType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1ContactType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="JobTitle" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="DepartmentName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="PrimaryContactIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="Salutation" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Communication" type="Q1CommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1ConveyancerInstructionType">
+		<xsd:sequence>
+			<xsd:element name="OriginationDate" type="DateType"/>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType" minOccurs="0"/>
+			<xsd:element name="InstructionTypeCode" type="InstructionTypeCodeType"/>
+			<xsd:element name="SubjectProperty" type="Q1SubjectPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Note" type="Q1NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1NoteType">
+		<xsd:sequence>
+			<xsd:element name="Type" type="Q1NoteTypeEnum"/>
+			<xsd:element name="Code" type="xsd:string"/>
+			<xsd:element name="Value" type="xsd:string"/>
+			<xsd:element name="Note" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="Q1NoteTypeEnum">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="AcceptanceNote"/>
+			<xsd:enumeration value="ConveyancerPartyNotes"/>
+			<xsd:enumeration value="RejectionNote"/>
+			<xsd:enumeration value="PanelInstructionNote"/>
+			<xsd:enumeration value="PanelInstructionListNote"/>
+			<xsd:enumeration value="AdditionalComment"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Q1ConveyancerPartyType">
+		<xsd:sequence>
+			<xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Type" type="ec:ConveyancerType" minOccurs="0"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+			<xsd:element name="Organization" type="Q1OrganizationType" minOccurs="0"/>
+			<!--extension done by TM-->
+			<!--end of extension done by TM-->
+		</xsd:sequence>
+	</xsd:complexType>
+  <xsd:complexType name="Q1PartyType">
+    <xsd:sequence>
+      <xsd:element name="PanelReferenceID" type="Q1IdentifierType" minOccurs="0"/>
+      <xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+      <xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Contact" type="Q1ContactType" minOccurs="0"/>
+      <xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+      <xsd:element name="Organization" type="Q1OrganizationType" minOccurs="0"/>
+      <!--extension done by TM-->
+      <!--end of extension done by TM-->
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Q1CountryType">
+		<xsd:sequence>
+			<xsd:element name="IdentificationCode" type="UKCountryCodeType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1LenderPartyType">
+		<xsd:sequence>
+			<xsd:element name="ExternalID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="Contact" type="Q1ContactType" minOccurs="0"/>
+			<xsd:element name="MailingAddress" type="Q1MailingAddressType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1MailingAddressType">
+		<xsd:sequence>
+			<xsd:element name="Type" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingNumber" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Department" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Floor" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Room" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="StreetName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CityName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CitySub-Division" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentity" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentityCode" type="UKCountyCodeType" minOccurs="0"/>
+			<xsd:element name="Zone" type="Q1TextType"/>
+			<xsd:element name="AddressLine" type="Q1AddressLineType" minOccurs="0"/>
+			<xsd:element name="Country" type="Q1CountryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1OrganizationType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="LegalEntityID" type="Q1IdentifierType" minOccurs="0"/>
+			<xsd:element name="LegalClassificationCode" type="OrganizationTypeCodeType"/>
+			<xsd:element name="Name" type="Q1NameType"/>
+			<xsd:element name="ShortName" type="Q1NameType" minOccurs="0"/>
+			<xsd:element name="Description" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="IncorporationDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="DoingBusinessAsName" type="Q1NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PlaceOfRegistration" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="PlaceOfIncorporation" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="RegisteredOfficeAddress" type="Q1RegisteredOfficeAddressType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1PropertyAddressType">
+		<xsd:sequence>
+			<xsd:element name="Plot" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingNumber" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Department" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Floor" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Room" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="StreetName" type="Q1TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CityName" type="Q1TextType"/>
+			<xsd:element name="CitySub-Division" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentity" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentityCode" type="UKCountyCodeType" minOccurs="0"/>
+			<xsd:element name="Zone" type="Q1TextType"/>
+			<xsd:element name="UPRN" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="AddressLine" type="Q1AddressLineType" minOccurs="0"/>
+			<xsd:element name="Country" type="Q1CountryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1ReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Reference" type="Q1TextType"/>
+			<xsd:element name="AllocatedBy" type="Q1TextType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1RegisteredOfficeAddressType">
+		<xsd:sequence>
+			<xsd:element name="Postbox" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingNumber" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="BuildingName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Department" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Floor" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="Room" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="StreetName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CityName" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CitySub-Division" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentity" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="CountrySubentityCode" type="UKCountyCodeType" minOccurs="0"/>
+			<xsd:element name="Zone" type="Q1TextType" minOccurs="0"/>
+			<xsd:element name="AddressLine" type="Q1AddressLineType" minOccurs="0"/>
+			<xsd:element name="Country" type="Q1CountryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1RejectionResponseType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="RejectionResponseCodeType" minOccurs="0"/>
+			<xsd:element name="Reason" type="Q1TextType"/>
+			<xsd:element name="Notes" type="Q1TextType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1SubjectPropertyType">
+		<xsd:sequence>
+			<xsd:element name="PropertyReference" type="ec:ReferenceType" maxOccurs="unbounded"/>
+			<xsd:element name="PropertyAddress" type="Q1PropertyAddressType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Q1TransactionInformationType">
+		<xsd:sequence>
+			<xsd:element name="InstructionDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="TransactionReference" type="ec:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Reference" type="Q1ReferenceType" minOccurs="0" maxOccurs="3"/>
+			<xsd:element name="ConveyancerParty" type="Q1ConveyancerPartyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BusinessInstructorParty" type="Q1BusinessInstructorPartyType" minOccurs="0"/>
+			<xsd:element name="BusinessOriginatorParty" type="Q1BusinessOriginatorPartyType" minOccurs="0"/>
+      <xsd:element name="IntroducerParty" type="Q1PartyType" minOccurs="0"/>
+      <xsd:element name="PanelManagerParty" type="Q1PartyType" minOccurs="0"/>
+    </xsd:sequence>
+	</xsd:complexType>
+	<!--Datatypes-->
+	<xsd:complexType name="ChannelCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="ChannelCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="DateType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:date"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="IndicatorType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:boolean"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="InstructionTypeCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="InstructionTypeCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OrganizationTypeCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="OrganizationTypeCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1IdentifierType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1NameType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Q1TextType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="RejectionResponseCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="RejectionResponseCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="UKCountryCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="UKCountryCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="UKCountyCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="UKCountyCodeContentType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<!--Contenttypes-->
+	<xsd:simpleType name="ChannelCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="AA"/>
+			<xsd:enumeration value="AB"/>
+			<xsd:enumeration value="AC"/>
+			<xsd:enumeration value="AD"/>
+			<xsd:enumeration value="AE"/>
+			<xsd:enumeration value="AF"/>
+			<xsd:enumeration value="AG"/>
+			<xsd:enumeration value="AH"/>
+			<xsd:enumeration value="AI"/>
+			<xsd:enumeration value="AJ"/>
+			<xsd:enumeration value="AK"/>
+			<xsd:enumeration value="AL"/>
+			<xsd:enumeration value="AM"/>
+			<xsd:enumeration value="AN"/>
+			<xsd:enumeration value="AO"/>
+			<xsd:enumeration value="AP"/>
+			<xsd:enumeration value="CA"/>
+			<xsd:enumeration value="DX"/>
+			<xsd:enumeration value="EI"/>
+			<xsd:enumeration value="EM"/>
+			<xsd:enumeration value="EX"/>
+			<xsd:enumeration value="FT"/>
+			<xsd:enumeration value="FX"/>
+			<xsd:enumeration value="GM"/>
+			<xsd:enumeration value="IE"/>
+			<xsd:enumeration value="IM"/>
+			<xsd:enumeration value="MA"/>
+			<xsd:enumeration value="PB"/>
+			<xsd:enumeration value="PS"/>
+			<xsd:enumeration value="SW"/>
+			<xsd:enumeration value="TE"/>
+			<xsd:enumeration value="TG"/>
+			<xsd:enumeration value="TL"/>
+			<xsd:enumeration value="TM"/>
+			<xsd:enumeration value="TT"/>
+			<xsd:enumeration value="TX"/>
+			<xsd:enumeration value="XF"/>
+			<xsd:enumeration value="XG"/>
+			<xsd:enumeration value="XH"/>
+			<xsd:enumeration value="XI"/>
+			<xsd:enumeration value="XJ"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="InstructionTypeCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="20"/>
+			<xsd:enumeration value="30"/>
+			<xsd:enumeration value="40"/>
+			<xsd:enumeration value="50"/>
+			<xsd:enumeration value="60"/>
+			<xsd:enumeration value="70"/>
+			<xsd:enumeration value="80"/>
+			<xsd:enumeration value="90"/>
+			<xsd:enumeration value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OrganizationTypeCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Limited Partnership"/>
+			<xsd:enumeration value="Partnership"/>
+			<xsd:enumeration value="Private Company Limited By Guarantee"/>
+			<xsd:enumeration value="Private Company Limited By Shares"/>
+			<xsd:enumeration value="Public Limited Company"/>
+			<xsd:enumeration value="Sole Trader"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RejectionResponseCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="20"/>
+			<xsd:enumeration value="30"/>
+			<xsd:enumeration value="40"/>
+			<xsd:enumeration value="50"/>
+			<xsd:enumeration value="60"/>
+			<xsd:enumeration value="70"/>
+			<xsd:enumeration value="80"/>
+			<xsd:enumeration value="90"/>
+			<xsd:enumeration value="100"/>
+			<xsd:enumeration value="110"/>
+			<xsd:enumeration value="120"/>
+			<xsd:enumeration value="130"/>
+			<xsd:enumeration value="140"/>
+			<xsd:enumeration value="150"/>
+			<xsd:enumeration value="160"/>
+			<xsd:enumeration value="180"/>
+			<xsd:enumeration value="190"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="UKCountryCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="England"/>
+			<xsd:enumeration value="Northern Ireland"/>
+			<xsd:enumeration value="Scotland"/>
+			<xsd:enumeration value="Wales"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="UKCountyCodeContentType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Bedfordshire"/>
+			<xsd:enumeration value="Berkshire"/>
+			<xsd:enumeration value="Buckinghamshire"/>
+			<xsd:enumeration value="Cambridgeshire"/>
+			<xsd:enumeration value="Cheshire"/>
+			<xsd:enumeration value="Cornwall"/>
+			<xsd:enumeration value="Cumbria"/>
+			<xsd:enumeration value="Derbyshire"/>
+			<xsd:enumeration value="Devon"/>
+			<xsd:enumeration value="Dorset"/>
+			<xsd:enumeration value="Durham"/>
+			<xsd:enumeration value="East Sussex"/>
+			<xsd:enumeration value="Essex"/>
+			<xsd:enumeration value="Gloucestershire"/>
+			<xsd:enumeration value="Greater London"/>
+			<xsd:enumeration value="Greater Manchester"/>
+			<xsd:enumeration value="Hampshire"/>
+			<xsd:enumeration value="Herefordshire"/>
+			<xsd:enumeration value="Hertfordshire"/>
+			<xsd:enumeration value="Isle of Wight"/>
+			<xsd:enumeration value="Kent"/>
+			<xsd:enumeration value="Lancashire"/>
+			<xsd:enumeration value="Leicestershire"/>
+			<xsd:enumeration value="Lincolnshire"/>
+			<xsd:enumeration value="Merseyside"/>
+			<xsd:enumeration value="Norfolk"/>
+			<xsd:enumeration value="North Yorkshire"/>
+			<xsd:enumeration value="Northamptonshire"/>
+			<xsd:enumeration value="Northumberland"/>
+			<xsd:enumeration value="Nottinghamshire"/>
+			<xsd:enumeration value="Oxfordshire"/>
+			<xsd:enumeration value="Shropshire"/>
+			<xsd:enumeration value="Somerset"/>
+			<xsd:enumeration value="South Yorkshire"/>
+			<xsd:enumeration value="Staffordshire"/>
+			<xsd:enumeration value="Suffolk"/>
+			<xsd:enumeration value="Surrey"/>
+			<xsd:enumeration value="Tyne and Wear"/>
+			<xsd:enumeration value="Warwickshire"/>
+			<xsd:enumeration value="West Midlands"/>
+			<xsd:enumeration value="West Sussex"/>
+			<xsd:enumeration value="West Yorkshire"/>
+			<xsd:enumeration value="Wiltshire"/>
+			<xsd:enumeration value="Worcestershire"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

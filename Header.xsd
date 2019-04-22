@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.oscre.org/ns/v1/Header" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:hd="http://www.oscre.org/ns/v1/Header" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:annotation>
+		<xs:documentation>			
+		*********************************************************************************************************************************************************************************************************************
+			Author: 			Ash Singhal
+							
+			Company:			TM Group
+								
+			Release Date:		11-04-2011
+			
+			Copyright (c) 2011 TMGroup, All Rights Reserved. For more information please visit http://www.tmgroup.co.uk			
+		*********************************************************************************************************************************************************************************************************************
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="Header">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Version" type="hd:VersionType" minOccurs="0"/>
+				<xs:element name="Mode" type="hd:ModeType" minOccurs="0"/>
+				<xs:element name="MessageID" type="xs:string" minOccurs="0"/>
+				<xs:element name="MessageType" type="xs:string" minOccurs="0"/>
+				<xs:element name="MessageSubType" type="xs:string" minOccurs="0"/>
+				<xs:element name="Status" type="xs:string" minOccurs="0"/>
+				<xs:element name="Description" type="xs:string" minOccurs="0"/>
+				<xs:element name="Authentication" type="hd:AuthenticationType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AuthenticationType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="Username" type="xs:string"/>
+					<xs:element name="Password" type="xs:string"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="AuthenticationID" type="xs:string"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="ImpersonateCompanyName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ImpersonateUserFirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ImpersonateUserLastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ImpersonateUserTelephone" type="xs:string" minOccurs="0"/>
+			<xs:element name="ImpersonateUserEmail" type="xs:string" minOccurs="0"/>
+			<xs:element name="ImpersonateCustomerID" type="xs:string" minOccurs="0"/>
+			<xs:element name="ImpersonateUserName" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="VersionType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:enumeration value="1.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ModeType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:enumeration value="Operational"/>
+			<xs:enumeration value="Test"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
