@@ -1,8 +1,7 @@
 <?php
 
-    $user_id = 100;
-
     $result = [];
+
     if($_FILES["x-files"]["error"] > 0){
         echo "Error: " . $_FILES["x-files"]["error"] . "<br>";
     } else{
@@ -38,9 +37,8 @@
             $xml_txt = file_get_contents($t_path);
 
             //Call the validation method
-            $result_string = $client->call('validate_xml', array('x_content'=>$xml_txt));
-            
-            //echo $result_string;
+            $result_string = $client->call('validate_xml', array('x_filename'=> $file_name,'x_content'=>$xml_txt));            
+
             // Save result String to already existing XML file in tmp folder
             file_put_contents('./tmp/'.$file_name, $result_string);
             
@@ -67,17 +65,9 @@
             }
             $result['TransactionInformation'] = $transactionInformation;
 
-            // Move files from tmp to Success or Failure
-            if ($result['Status'] == 'Success') {
-                rename('./tmp/'.$file_name, './Success/'.'[Success]'.$file_name);
-            } else {
-                rename('./tmp/'.$file_name, './Failure/'.'[Failure]'.$file_name);
-            }
-                
-        } else {
-            // echo 'no';
-        }
-        
+            //delete a temp file
+            unlink('./tmp/'.$file_name);
+        }        
     }
 ?>
 <html>

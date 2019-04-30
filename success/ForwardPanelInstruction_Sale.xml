@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConveyancerInstructionSend xmlns="http://www.oscre.org/ns/LC-version-1.1/OS/ConveyancerInstructionSend">
+	<Header xmlns="http://www.oscre.org/ns/v1/Header">
+		<MessageType>ForwardPanelInstruction</MessageType>
+		<MessageSubType>SaleInstruction</MessageSubType>
+		<Status>Request</Status>
+		<Authentication>
+			<Username>YOUR USER NAME</Username>
+			<Password>YOUR PASSWORD</Password>
+		</Authentication>
+	</Header>
+	<MessageSentDate>
+		<Date>2018-01-23</Date>
+	</MessageSentDate>
+	<TransactionInformation>
+		<InstructionDate>2018-01-23</InstructionDate>
+		<TransactionReference>
+			<Reference xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">C/MMCON_LIVE_HC00123</Reference>
+			<AllocatedBy xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">LenderConveyancerParty</AllocatedBy>
+			<Description xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">Instruction</Description>
+		</TransactionReference>
+		<TransactionReference>
+			<Reference xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">MMCON_LIVE_HC00123</Reference>
+			<AllocatedBy xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">PanelManagerParty</AllocatedBy>
+			<Description xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">Instruction</Description>
+		</TransactionReference>
+		<TransactionReference>
+			<Reference xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">289349</Reference>
+			<AllocatedBy xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">BusinessFacilitatorParty</AllocatedBy>
+			<Description xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">Instruction</Description>
+		</TransactionReference>
+		<TransactionReference>
+			<Reference xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">MMCON_LIVE_HC00123</Reference>
+			<AllocatedBy xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">BusinessInstructorParty</AllocatedBy>
+			<Description xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">Instruction</Description>
+		</TransactionReference>
+		<ConveyancerParty>
+			<PanelReferenceID>1220</PanelReferenceID>
+			<Type>
+				<ConveyancerTypeCode xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">Lender</ConveyancerTypeCode>
+				<ConveyancerTypeDescription xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">Test Conveyncer</ConveyancerTypeDescription>
+			</Type>
+		</ConveyancerParty>
+		<BusinessInstructorParty>
+			<PanelReferenceID>121212</PanelReferenceID>
+		</BusinessInstructorParty>
+		<BusinessOriginatorParty>
+			<PanelReferenceID>Connells</PanelReferenceID>
+			<Name>Blandford Forum</Name>
+			<Company>Connells</Company>
+			<Contact>
+				<ID>030021</ID>
+				<PrimaryContactIndicator>1</PrimaryContactIndicator>
+				<Name>Thomas Howden</Name>
+				<Communication>
+					<ChannelCode>TE</ChannelCode>
+					<Value>01258 452 327</Value>
+					<Description/>
+				</Communication>
+			</Contact>
+		</BusinessOriginatorParty>
+		<Panel>
+			<PanelReferenceID>2</PanelReferenceID>
+		</Panel>
+	</TransactionInformation>
+	<ConveyancerInstruction>
+		<OriginationDate>2018-01-23</OriginationDate>
+		<InstructionTypeCode>20</InstructionTypeCode>
+		<ClientType>LegalOwnerParty</ClientType>
+		<SubjectProperty>
+			<PropertyReference>
+				<Reference xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">BLF12222</Reference>
+				<AllocatedBy xmlns="http://www.oscre.org/ns/v1/ExtensionCommon">BusinessInstructorParty</AllocatedBy>
+			</PropertyReference>
+			<Type>House</Type>
+			<Style>MidTerraced</Style>
+			<LegalOwnerParty>
+				<Name>Mrs S. Trace</Name>
+				<LegalOwnerPerson>
+					<FullName>Mrs Sony Trace</FullName>
+					<GivenName>Sony</GivenName>
+					<FamilyName>Trace</FamilyName>
+					<Title>Mrs</Title>
+					<IsMainLegalOwner>1</IsMainLegalOwner>
+					<MailingAddress>
+						<BuildingNumber>33</BuildingNumber>
+						<StreetName>Montrose Close</StreetName>
+						<CityName>Swindon</CityName>
+						<CountrySubentity>Wiltshire</CountrySubentity>
+						<Zone>SN2 2JS</Zone>
+						<Country>
+							<Name>England</Name>
+						</Country>
+					</MailingAddress>
+					<Contact>
+						<ID>BLF315587</ID>
+						<PrimaryContactIndicator>1</PrimaryContactIndicator>
+						<Name>Mrs Jane Smith</Name>
+						<Communication>
+							<ChannelCode>TE</ChannelCode>
+							<Value>07873123589</Value>
+							<Description>HomePhone</Description>
+						</Communication>
+						<Communication>
+							<ChannelCode>EM</ChannelCode>
+							<Value>hello@test.co.uk</Value>
+							<Description>Email Address</Description>
+						</Communication>
+					</Contact>
+				</LegalOwnerPerson>
+			</LegalOwnerParty>
+			<EvidenceOfTitle>
+				<TenureTypeCode>0</TenureTypeCode>
+			</EvidenceOfTitle>
+			<PropertyAddress>
+				<BuildingNumber>11</BuildingNumber>
+				<StreetName>Ashmore Close</StreetName>
+				<CityName>Blandford Forum</CityName>
+				<CountrySubentity>Dorset</CountrySubentity>
+				<Zone>DT51 7UH</Zone>
+				<Country>
+					<Name>England</Name>
+				</Country>
+			</PropertyAddress>
+			<AskingPrice>220000</AskingPrice>
+			<CurrentPropertyStatus>Draft</CurrentPropertyStatus>
+			<EPCType>VendorProviding</EPCType>
+			<PropertyParticularsURL/>
+		</SubjectProperty>
+		<Note>
+			<Type>AcceptanceNote</Type>
+			<Code>1</Code>
+			<Value/>
+		</Note>
+	</ConveyancerInstruction>
+</ConveyancerInstructionSend>

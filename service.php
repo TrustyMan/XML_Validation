@@ -8,7 +8,8 @@ $server->configureWSDL('validate_xml');
 
 // Register the "hello" method to expose it
 $server->register('validate_xml',
-        array('x_content' => 'xsd:string'),   // parameter
+        array('x_filename' => 'xsd:string',
+            'x_content' => 'xsd:string'),   // parameter
         array('return' => 'xsd:string'),     // output
         'urn:server',                        // namespace
         'urn:server#helloServer',            // soapaction
@@ -17,7 +18,7 @@ $server->register('validate_xml',
         'XML validation');                   // description
 
 
-function validate_xml($x_content)
+function validate_xml($file_name, $x_content)
 {
     $xml = new DOMDocument(); 
     $xml->loadXML($x_content); 
@@ -26,6 +27,10 @@ function validate_xml($x_content)
         return libxml_display_failure($x_content);
     }    
 
+    $fp = fopen("./success/".$file_name, "w");
+    fwrite($fp, $x_content);
+    fclose($fp);
+    
     return libxml_display_success($x_content);
 }
 
@@ -87,27 +92,7 @@ function libxml_display_success($x_content)
     $xml = DOMDocument::loadXML($x_content); 
     $xml_string = makeXML($xml, 'Success');
 
-    return $xml_string;
-    // $xml_result = [ 'ResStatus' => 'Success',
-    //                 'MessageType' => $xml->getElementsByTagName('MessageType')->item(0)->nodeValue,
-    //                 'MessageSubType' => $xml->getElementsByTagName('MessageSubType')->item(0)->nodeValue,
-    //                 'Status' => 'Success', //$xml->getElementsByTagName('Status')->item(0)->nodeValue,
-    //                 'MessageSentDate' => $xml->getElementsByTagName('Date')->item(0)->nodeValue,
-    //                 'InstructionDate' => $xml->getElementsByTagName('InstructionDate')->item(0)->nodeValue
-    //                ];
-    // $nodes = $xml->getElementsByTagName('TransactionReference');
-    // $transactionInformation = [];
-    // $i = 0;
-    // foreach($nodes as $node) {
-    //     $transactionInformation[$i]['Reference'] = $node->getElementsByTagName('Reference')->item(0)->nodeValue;
-    //     $transactionInformation[$i]['AllocatedBy'] = $node->getElementsByTagName('AllocatedBy')->item(0)->nodeValue;
-    //     $transactionInformation[$i]['Description'] = $node->getElementsByTagName('Description')->item(0)->nodeValue;
-    //     $i++;
-    // }
-    // $xml_result['TransactionInformation'] = $transactionInformation;
-
-    // return json_encode($xml_result);
-    // return $xml->saveXML();
+    return $xml_string;  
 }
 
 function makeXML($xml, $status, $error='') {
