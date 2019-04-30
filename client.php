@@ -1,10 +1,10 @@
 <?php
-    header('Content-type: text/xml');
+    // header('Content-type: text/xml');
 
     require_once('./lib/nusoap.php');
 
     // This is your Web service server WSDL URL address
-    $wsdl = "http://localhost/new_instrunctions/service.php?wsdl";
+    $wsdl = "http://localhost/new_instructions/service.php?wsdl";
 
     // Create client object
     $client = new nusoap_client($wsdl, 'wsdl');
@@ -17,8 +17,9 @@
         exit();
     }
 
-    // Call the hello method
+    //Call the validation method
     $result = $client->call('validate_xml');
-    print_r($result).'\n';
-
+    $result = json_decode($result);
+    
+    var_dump($result);
 ?>
